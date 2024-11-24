@@ -30,13 +30,25 @@ const displayPhones = (phones) => {
 
     displayPhones.appendChild(cardDiv);
   }
+
+  toggleLoadingSpinner(false);
 };
 
 const handleSearch = () => {
+  toggleLoadingSpinner(true);
   const searchField = document.getElementById("search_field");
   const searchText = searchField.value;
   console.log(searchText);
   loadPhone(searchText);
+};
+
+const toggleLoadingSpinner = (isLoading) => {
+  const loadingSpinner = document.getElementById("loading-spinner");
+  if (isLoading) {
+    loadingSpinner.classList.remove("hidden");
+  } else {
+    loadingSpinner.classList.add("hidden");
+  }
 };
 
 loadPhone();
