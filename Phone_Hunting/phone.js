@@ -7,7 +7,7 @@ const loadPhone = async (searchText) => {
 };
 
 const displayPhones = (phones) => {
-  console.log(phones);
+  //   console.log(phones);
   const displayPhones = document.getElementById("displayPhones");
   displayPhones.innerHTML = ``;
   for (const phone of phones.data) {
@@ -23,7 +23,7 @@ const displayPhones = (phones) => {
     <h2 class="card-title">${phone.phone_name}</h2>
     <p>${phone.brand}</p>
     <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
+      <button onclick="showDetailsF('${phone.slug}') " id="show-details" class="btn btn-primary">Show Details</button>
     </div>
   </div>
 </div>`;
@@ -32,6 +32,28 @@ const displayPhones = (phones) => {
   }
 
   toggleLoadingSpinner(false);
+};
+
+const showDetailsF = async (id) => {
+  const modal = document.createElement("div");
+  //load single phone data
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${id}`
+  );
+  const phoneData = await res.json();
+  const phone = phoneData.data;
+  showPhoneDetails(phone);
+};
+
+const showPhoneDetails = (phone) => {
+  console.log(phone);
+  show_details_modal.showModal();
+  const modal = document.getElementById("modalContainer");
+  modal.innerHTML = `
+  <img src="${phone.image}" alt="" />
+    <h1>${phone.name}</h1>
+    <h3>Storage : ${phone.mainFeatures.memory}</h3>
+    `;
 };
 
 const handleSearch = () => {
