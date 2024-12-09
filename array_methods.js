@@ -9,6 +9,19 @@ const products = [
   { name: "Monitor", price: 25000, brand: "Dell", color: "Black" },
 ];
 
+const newProduct = {
+  name: "Earphone",
+  price: 2500,
+  brand: "QCY",
+  color: "White",
+};
+
+const newProducts = [...products, newProduct];
+console.log(newProducts);
+
+const specificOnly = products.filter((p) => p.name !== "Monitor");
+console.log(specificOnly);
+
 const brands = products.map((product) => product.brand);
 console.log(brands);
 
